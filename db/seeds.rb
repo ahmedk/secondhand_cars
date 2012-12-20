@@ -32,10 +32,10 @@ owners.each do |owner|
 end
 
 #create cars
-cars = [{:description => "", :price => 350000, :year => '2013', :seats => 4, :doors => 4, :car_model_id => 2, :owner_id => 1},
-        {:description => "", :price => 350000, :year => '2012', :seats => 4, :car_model_id => 4, :owner_id => 2},
-        {:description => "", :price => 350000, :year => '2008', :car_model_id => 6, :owner_id => 3},
-        {:description => "", :price => 350000, :year => '2012', :seats => 4, :doors => 4, :car_model_id => 8, :owner_id => 4}]
+cars = [{:description => "A/T fairly new", :price => 350000, :year => 2013, :seats => 4, :doors => 4, :car_model_id => 2, :owner_id => 1},
+        {:description => "M/T good shape", :price => 350000, :year => 2012, :seats => 4, :car_model_id => 4, :owner_id => 2},
+        {:description => "Good shape, barely used", :price => 350000, :year => 2008, :car_model_id => 6, :owner_id => 3},
+        {:description => "please call for details", :price => 350000, :year => 2012, :seats => 4, :doors => 4, :car_model_id => 8, :owner_id => 4}]
 cars.each do |car|
   Car.create! car
 end

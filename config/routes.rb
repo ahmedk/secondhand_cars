@@ -1,4 +1,8 @@
 SecondhandCars::Application.routes.draw do
+  get "car/index"
+
+  get "car/details"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -11,8 +11,8 @@ describe CarController do
 
   describe "GET 'details'" do
     it "should display car page" do
-      Car.should_receive(:find(1))
-      get 'details/1/'
+      Car.should_receive(:find).with(1)
+      get 'details', :id => 1
     end
   end
 

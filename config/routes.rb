@@ -1,7 +1,7 @@
 SecondhandCars::Application.routes.draw do
-  get "car/index"
+  get "car/" => 'car#index'
 
-  get "car/details"
+  get "car/:id" => 'car#details', :as => :car_details
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

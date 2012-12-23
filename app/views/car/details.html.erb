@@ -1,2 +1,17 @@
-<h1>Car#details</h1>
-<p>Find me in app/views/car/details.html.erb</p>
+<h1><%= @car.make_name %> - <%= @car.model_name %></h1>
+<h2><%= @car.year %></h2>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <td><%= @car.description %></td>
+  </tr>
+  <tr>
+    <th>Price</th>
+    <td><%= @car.price %>LE</td>
+  </tr>
+</table>
+
+<%= render :partial => "owner/owner_contact", :locals => { :owner => @car.owner } %>
+
+<%= link_to 'Return to List', car_path %>

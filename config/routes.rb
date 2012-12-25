@@ -3,6 +3,8 @@ SecondhandCars::Application.routes.draw do
 
   get "car/:id" => 'car#details', :as => :car_details
 
+  match 'home/getmodels' => 'application#get_models'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

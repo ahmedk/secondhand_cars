@@ -6,8 +6,7 @@ class CarController < ApplicationController
     elsif(!params[:make].nil? && params[:make] != "")
       @cars = @cars.select { |c| c.car_model.make.name == params[:make] }
     end
-    puts "blllllllllllllllllllllaaaaaaaaaaaaaaaaaaaaaaa #{params[:date][:year]}"
-    @cars = @cars.select { |c| c.year.to_s == params[:date][:year] } unless params[:date][:year].nil? || params[:date][:year] == ""
+    @cars = @cars.select { |c| c.year.to_s == params[:date][:year] } unless params[:date].nil? || params[:date][:year] == ""
   end
 
   def details

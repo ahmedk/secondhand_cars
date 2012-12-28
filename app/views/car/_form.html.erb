@@ -1,0 +1,35 @@
+<form action="/car/save" method="POST">
+  <fieldset>
+    <legend>Car Details</legend>
+    <table>
+      <tr>
+        <th>Make</th>
+        <td><%= select_tag "make_id", options_from_collection_for_select(@makes, "id", "name") %></td>
+      </tr>
+      <tr>
+        <th>Make</th>
+        <td><select id="car_model_id" name="car_model_id"></select></td>
+      </tr>
+      <tr>
+        <th>Make</th>
+        <td><%= select_year(nil, :start_year => 1992, :end_year => Date.today.year + 1) %></td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td><textarea id="description" name="description" /></td>
+      </tr>
+      <tr>
+        <th>Price</th>
+        <td><input type="text" id="price" name="price" /></td>
+      </tr>
+      <tr>
+        <th>Price</th>
+        <td><input type="text" id="doors" name="doors" /></td>
+      </tr>
+      <tr>
+        <th>Price</th>
+        <td><input type="text" id="seats" name="seats" /></td>
+      </tr>
+    </table>
+  </fieldset>
+</form>

@@ -1,7 +1,8 @@
 SecondhandCars::Application.routes.draw do
   get "car/" => 'car#index'
-
+  get "car/new" => 'car#new'
   get "car/:id" => 'car#details', :as => :car_details
+  get "car/:id/edit" => 'car#edit', :as => :car_edit
 
   match 'home/getmodels' => 'application#get_models'
 

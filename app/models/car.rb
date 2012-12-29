@@ -18,4 +18,8 @@ class Car < ActiveRecord::Base
   def owner_phone
     return self.owner.get_contact
   end
+
+  def make
+  return self.car_model.make_id unless self.car_model.nil?
+  end
 end

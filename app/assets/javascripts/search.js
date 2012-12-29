@@ -1,8 +1,7 @@
 $(document).ready(function() {
-  $('#date_year').prepend('<option selected=""></option>');
   $('#make').change(function() {
+    $('#car_model').empty();
     if($(this).val() != '' && $(this).val() != undefined) {
-      $('#car_model').empty();
       $.get('/home/getmodels/', { make_name: $(this).val() }, function(data) {
         $('#car_model').append('<option></option>');
         for(i = 0; i < data.length; i++) {

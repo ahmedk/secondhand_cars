@@ -28,17 +28,20 @@ class CarController < ApplicationController
   end
 
   def edit
-    @makes = [Make.new(:name => "-- Select Make --", :id => -1), Make.all].flatten
     id = params[:id]
     if id.nil?
       flash[:error] = "Missing data"
       redirect_to :action => :index
     end
+
     @car = Car.find(id)
     if @car.nil?
       flash[:error] = "No such car"
       redirect_to :action => :index
     end
+
+    @makes = Make.all
+    @car_models = CarModel.where(:make_id => @car.make)
   end
 
   def create_or_update

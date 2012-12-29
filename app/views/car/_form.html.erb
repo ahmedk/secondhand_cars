@@ -4,31 +4,37 @@
     <table>
       <tr>
         <th>Make</th>
-        <td><%= select_tag "make_id", options_from_collection_for_select(@makes, "id", "name") %></td>
+        <td><%= select_tag "make_id", options_from_collection_for_select(@makes, "id", "name", @car.make), :include_blank => true %></td>
       </tr>
       <tr>
-        <th>Make</th>
-        <td><select id="car_model_id" name="car_model_id"></select></td>
+        <th>Model</th>
+        <td>
+          <% if @car_models.nil? %>
+            <select id="car_model_id" name="car_model_id"></select>
+          <% else %>
+            <%= select_tag "car_model_id", options_from_collection_for_select(@car_models, "id", "name", @car.car_model_id), :include_blank => true %></td>
+          <% end %>
+        </td>
       </tr>
       <tr>
-        <th>Make</th>
-        <td><%= select_year(nil, :start_year => 1992, :end_year => Date.today.year + 1) %></td>
+        <th>Year</th>
+        <td><%= select_year(@car.year, :start_year => 1992, :end_year => Date.today.year + 1, :include_blank => true) %></td>
       </tr>
       <tr>
         <th>Description</th>
-        <td><textarea id="description" name="description" /></td>
+        <td><textarea id="description" name="description"><%= @car.description %></textarea></td>
       </tr>
       <tr>
         <th>Price</th>
-        <td><input type="text" id="price" name="price" /></td>
+        <td><input type="text" id="price" name="price" value="<%= @car.price %>" /></td>
       </tr>
       <tr>
-        <th>Price</th>
-        <td><input type="text" id="doors" name="doors" /></td>
+        <th>Doors</th>
+        <td><input type="text" id="doors" name="doors" value="<%= @car.doors %>" /></td>
       </tr>
       <tr>
-        <th>Price</th>
-        <td><input type="text" id="seats" name="seats" /></td>
+        <th>Seats</th>
+        <td><input type="text" id="seats" name="seats" value="<%= @car.seats %>" /></td>
       </tr>
     </table>
   </fieldset>

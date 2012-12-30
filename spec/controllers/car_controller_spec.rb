@@ -24,7 +24,7 @@ describe CarController do
 	describe "Get 'new'" do
 		it "should display new car page" do
 			get 'new'
-			page.should have_content('Edit')
+			page.should have_content('Create')
 		end
 	end
 

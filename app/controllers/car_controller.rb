@@ -45,7 +45,23 @@ class CarController < ApplicationController
   end
 
   def create_or_update
-    id = params[:id]
-    redirect_to :action => :index
+    id = params[:id]  # for use with login later
+		params.delete(:id)
+		params.delete(:make_id)
+		params.delete(:controller)
+		params.delete(:action)
+		params[:year] = params[:date][:year] unless params[:date].nil?
+		params.delete(:date)
+		@car = Car.new(params)
+		@car.id = id
+		puts "bllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa #{@car.valid?}"
+		puts @car.description
+		if !@car.valid?
+			render 'new' if id.nil?
+			render 'edit' unless id.nil?
+		else
+			@car.save
+			redirect_to :action => :details, :id => @car
+		end
   end
 end

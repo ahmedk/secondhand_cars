@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe CarController do
+  before(:each) do
+    @car = Car.new(:car_model_id => 1, :description => "A car", :year => "2009", :price => 30000, :doors => 2, :seats => 4)
+  end
 
   describe "GET 'index'" do
     it "should list all cars" do
@@ -11,11 +14,12 @@ describe CarController do
 
   describe "GET 'details'" do
 		it "should load correct car" do
-      Car.should_receive(:find).with(1)
+      Car.should_receive(:find).with("1")
       get 'details', :id => 1
     end
 
     it "should display car page" do
+      Car.stub(:find).and_return(@car)
 			get 'details', :id => 1
 			page.should have_content('Details')
 		end
@@ -30,7 +34,7 @@ describe CarController do
 
   describe "Get 'edit'" do
     it "should load correct car for edit page" do
-      Car.should_receive(:find).with(1)
+      Car.should_receive(:find).with("1")
 			get 'edit', :id => 1
     end
 

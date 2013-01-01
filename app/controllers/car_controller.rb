@@ -24,7 +24,8 @@ class CarController < ApplicationController
 
   def new
     @makes = Make.all
-    @car = Car.new(params[:car])
+    @car = Car.new
+    @car.owner = Owner.new
   end
 
   def edit
@@ -48,12 +49,17 @@ class CarController < ApplicationController
     id = params[:car][:id]  # for use with login later
     if(id.blank?)
       @car = Car.new(params[:car])
+      owner = Owner.new(params[:owner])
+      @car.owner = owner
     else
       @car = Car.find(id)
       @car.assign_attributes(params[:car])
     end
     @car.year = params[:date][:year] unless params[:date].nil?
+    @car.doors = nil if @car.doors.blank?
+    @car.seats = nil if @car.seats.blank?
     if !@car.valid?
+      puts @car.errors.full_messages
       redirect_to car_edit_path(id) unless id.blank?
       redirect_to :action => :new if id.blank?
     else

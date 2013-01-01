@@ -5,7 +5,6 @@
   <fieldset>
     <legend>Car Details</legend>
     <table>
-      
       <tr>
         <th>Make</th>
         <td><%= select_tag "make_id", options_from_collection_for_select(@makes, "id", "name", @car.make), :include_blank => true %></td>
@@ -41,6 +40,10 @@
         <td><%= f.text_field :seats %></td>
       </tr>
     </table>
-		<%= f.submit "Save" %>
   </fieldset>
+  <% if @car.new_record? %>
+    <%= render :partial => 'owner/owner_form' %>
+  <% end %>
+
+  <%= f.submit "Save" %>
 <% end %>

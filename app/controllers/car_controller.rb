@@ -23,8 +23,8 @@ class CarController < ApplicationController
   end
 
   def new
-    @makes = [Make.new(:name => "-- Select Make --", :id => -1), Make.all].flatten
-    @car = Car.new
+    @makes = Make.all
+    @car = Car.new(params[:car])
   end
 
   def edit
@@ -34,7 +34,7 @@ class CarController < ApplicationController
       redirect_to :action => :index
     end
 
-    @car = Car.find(id)
+    @car = Car.find(id) if @car.nil?
     if @car.nil?
       flash[:error] = "No such car"
       redirect_to :action => :index
@@ -45,23 +45,20 @@ class CarController < ApplicationController
   end
 
   def create_or_update
-    id = params[:id]  # for use with login later
-		params.delete(:id)
-		params.delete(:make_id)
-		params.delete(:controller)
-		params.delete(:action)
-		params[:year] = params[:date][:year] unless params[:date].nil?
-		params.delete(:date)
-		@car = Car.new(params)
-		@car.id = id
-		puts "bllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa #{@car.valid?}"
-		puts @car.description
-		if !@car.valid?
-			render 'new' if id.nil?
-			render 'edit' unless id.nil?
-		else
-			@car.save
-			redirect_to :action => :details, :id => @car
-		end
+    id = params[:car][:id]  # for use with login later
+    if(id.blank?)
+      @car = Car.new(params[:car])
+    else
+      @car = Car.find(id)
+      @car.assign_attributes(params[:car])
+    end
+    @car.year = params[:date][:year] unless params[:date].nil?
+    if !@car.valid?
+      redirect_to car_edit_path(id) unless id.blank?
+      redirect_to :action => :new if id.blank?
+    else
+      @car.save
+      redirect_to :action => :details, :id => id
+    end
   end
 end

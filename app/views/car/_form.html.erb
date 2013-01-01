@@ -1,8 +1,11 @@
-<form action="/car/save" method="POST">
-	<input type="hidden" name="id" value="<%= @car.id %>" />
+<%= form_for(@car, :url => '/car/save') do |f| %>
+  <%= f.hidden_field :id %>
+  <%= f.hidden_field :owner_id %>
+  <%= f.hidden_field :sold %>
   <fieldset>
     <legend>Car Details</legend>
     <table>
+      
       <tr>
         <th>Make</th>
         <td><%= select_tag "make_id", options_from_collection_for_select(@makes, "id", "name", @car.make), :include_blank => true %></td>
@@ -11,9 +14,9 @@
         <th>Model</th>
         <td>
           <% if @car_models.nil? %>
-            <select id="car_model_id" name="car_model_id"></select>
+            <select id="car_model_id" name="car[car_model_id]"></select>
           <% else %>
-            <%= select_tag "car_model_id", options_from_collection_for_select(@car_models, "id", "name", @car.car_model_id), :include_blank => true %></td>
+            <%= select_tag "car[car_model_id]", options_from_collection_for_select(@car_models, "id", "name", @car.car_model_id), :include_blank => true %></td>
           <% end %>
         </td>
       </tr>
@@ -23,21 +26,21 @@
       </tr>
       <tr>
         <th>Description</th>
-        <td><textarea id="description" name="description"><%= @car.description %></textarea></td>
+        <td><%= f.text_area :description, :rows => 5 %></td>
       </tr>
       <tr>
         <th>Price</th>
-        <td><input type="text" id="price" name="price" value="<%= @car.price %>" /></td>
+        <td><%= f.text_field :price %></td>
       </tr>
       <tr>
         <th>Doors</th>
-        <td><input type="text" id="doors" name="doors" value="<%= @car.doors %>" /></td>
+        <td><%= f.text_field :doors %></td>
       </tr>
       <tr>
         <th>Seats</th>
-        <td><input type="text" id="seats" name="seats" value="<%= @car.seats %>" /></td>
+        <td><%= f.text_field :seats %></td>
       </tr>
     </table>
-		<input type="submit" value="Save" />
+		<%= f.submit "Save" %>
   </fieldset>
-</form>
+<% end %>

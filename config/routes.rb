@@ -3,7 +3,8 @@ SecondhandCars::Application.routes.draw do
   get "car/new" => 'car#new'
   get "car/:id" => 'car#details', :as => :car_details
   get "car/:id/edit" => 'car#edit', :as => :car_edit
-	post "car/save" => 'car#create_or_update'
+  post "car/save" => 'car#create_or_update', :as => :cars
+  put "car/save" => 'car#create_or_update'
 
   match 'home/getmodels' => 'application#get_models'
 

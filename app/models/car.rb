@@ -1,10 +1,10 @@
 class Car < ActiveRecord::Base
-  attr_accessible :description, :doors, :price, :seats, :year, :owner_id, :car_model_id
+  attr_accessible :description, :doors, :price, :seats, :year, :owner_id, :car_model_id, :sold
   belongs_to :car_model
   belongs_to :owner
-	validate :description, :year, :price, :presence => true
-	validate :doors, :numericality => { :only_integer => true }
-	validate :seats, :numericality => { :only_integer => true }
+	validates :description, :year, :price, :presence => true
+	validates :doors, :numericality => { :only_integer => true }
+	validates :seats, :numericality => { :only_integer => true }
 	validates_associated :car_model
 	validates_associated :owner
 

@@ -7,4 +7,7 @@ class ApplicationController < ActionController::Base
       render :json => Make.find(params[:make_id]).car_model.to_json
     end
   end
+
+  def index
+  end
 end

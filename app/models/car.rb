@@ -3,8 +3,8 @@ class Car < ActiveRecord::Base
   belongs_to :car_model
   belongs_to :owner
 	validates :description, :year, :price, :presence => true
-	validates :doors, :numericality => { :only_integer => true }
-	validates :seats, :numericality => { :only_integer => true }
+	validates :doors, :numericality => { :only_integer => true }, :allow_nil => true
+	validates :seats, :numericality => { :only_integer => true }, :allow_nil => true
 	validates_associated :car_model
 	validates_associated :owner
 

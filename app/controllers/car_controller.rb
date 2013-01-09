@@ -45,24 +45,26 @@ class CarController < ApplicationController
     @car_models = CarModel.where(:make_id => @car.make)
   end
 
+  def create
+    @car = Car.new(params[:car])
+    owner = Owner.new(params[:owner])
+    @car.owner = owner
+    create_or_update
+  end
+
+  def update
+    id = params[:car][:id]
+    @car = Car.find(id)
+    @car.assign_attributes(params[:car])
+    create_or_update
+  end
+
+private
   def create_or_update
-    id = params[:car][:id]  # for use with login later
-    if(id.blank?)
-      @car = Car.new(params[:car])
-      owner = Owner.new(params[:owner])
-      @car.owner = owner
-    else
-      @car = Car.find(id)
-      @car.assign_attributes(params[:car])
-    end
     @car.year = params[:date][:year] unless params[:date].nil?
     @car.doors = nil if @car.doors.blank?
     @car.seats = nil if @car.seats.blank?
-    if !@car.valid?
-      puts @car.errors.full_messages
-      redirect_to car_edit_path(id) unless id.blank?
-      redirect_to :action => :new if id.blank?
-    else
+    if @car.valid?
       @car.save
       redirect_to :action => :details, :id => id
     end

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Car do
   describe "failed save" do
     before(:each) do
-      @car = Car.new(:car_model_id => 1, :description => "A car", :year => "2009", :price => 30000, :doors => 2, :seats => 4)
+      @car = Car.new(:car_model_id => 1, :description => "A car", :year => "2009", :price => 30000, :doors => 2, :seats => 4, :owner_id => 1)
     end
 
     it "should invalidate car with missing car model" do

@@ -10,4 +10,11 @@ class ApplicationController < ActionController::Base
 
   def index
   end
+
+  def search
+    if request.method == "GET"
+      return
+    end
+    @cars = Car.match(params[:search])
+  end
 end

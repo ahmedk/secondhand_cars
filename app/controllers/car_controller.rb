@@ -2,9 +2,9 @@ class CarController < ApplicationController
   def index
     @cars = Car.all
     if(!params[:car_model].nil? && params[:car_model] != "")
-      @cars = @cars.select { |c| c.car_model.name == params[:car_model] }
+      @cars = @cars.select { |c| c.model_name == params[:car_model] }
     elsif(!params[:make].nil? && params[:make] != "")
-      @cars = @cars.select { |c| c.car_model.make.name == params[:make] }
+      @cars = @cars.select { |c| c.make_name == params[:make] }
     end
     @cars = @cars.select { |c| c.year.to_s == params[:date][:year] } unless params[:date].nil? || params[:date][:year] == ""
   end
@@ -68,5 +68,7 @@ private
       @car.save
       redirect_to :action => :details, :id => id
     end
+    @makes = Make.all
+    @car_models = CarModel.where(:make_id => @car.make)
   end
 end

@@ -17,30 +17,23 @@ describe CarController do
       Car.should_receive(:find).with("1")
       get 'details', :id => 1
     end
-
-    it "should display car page" do
-      Car.stub(:find).and_return(@car)
-			get 'details', :id => 1
-			page.should have_content('Details')
-		end
   end
 
-	describe "Get 'new'" do
-		it "should display new car page" do
-			get 'new'
-			page.should have_content('Create')
-		end
+	describe "Post 'create'" do
+		it "should save new car to db"
 	end
 
   describe "Get 'edit'" do
     it "should load correct car for edit page" do
-      Car.should_receive(:find).with("1")
+      Car.should_receive(:find).with("1").and_return(@car)
 			get 'edit', :id => 1
     end
+  end
 
-    it "should display edit page" do
-			get 'edit', :id => 1
-			page.should have_content('Edit')
-		end
+  describe "Put 'update'" do
+    it "should save a model to db"# do
+      #@car.should_receive(:save)
+      #put 'update', :car => car
+    #end
   end
 end

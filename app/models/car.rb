@@ -29,10 +29,18 @@ class Car < ActiveRecord::Base
   end
 
   def self.match(criteria)
-    result = Car.all
-    search.each do |key, value|
-      reault = result.find("#{key} = #{value}") unless (value.nil? || value != '')
-    end
+    criteria = criteria.delete_if {|key, value| value.nil? || value == '' }
+    criteria[:price] = criteria[:price_from]..cirteria[:price_to] if criteria[:price_from] && criteria[:price_to]
+    criteria = Car.merge_conditions(criteria) + " AND price > #{criteria[:price_from]}" if !criteria[:price_from].nil? && criteria[:price_to].nil?
+    criteria = Car.merge_conditions(criteria) + " AND price < #{criteria[:price_from]}" if criteria[:price_from].nil? && !criteria[:price_to].nil?
+    result = Car.find(:all, conditions => criteria)
+    #if(criteria[:price_from] != '' || criteria[:price_to] != '')
+    #  search.remove :price_from
+    #  search.remove :price_to
+    #end
+    #search.each do |key, value|
+    #  reault = result.find("#{key} = #{value}") unless (value.nil? || value != '')
+    #end
     #if(search[:car_model] && search[:car_model] != '')
     #  result = result.find(:car_model_id => search[:car_model])
     #elsif(search[:make] && search[:make] != '')

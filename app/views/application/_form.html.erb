@@ -7,7 +7,7 @@
       </tr>
       <tr>
         <td><label>Model</label></td>
-        <td><select id="car_model" name="search[car_model_id]"></select></td>
+        <td><select id="search_car_model" name="search[car_model_id]"></select></td>
       </tr>
       <tr>
         <td><label>Year</label></td>
@@ -33,4 +33,19 @@
       </tr>
     </table>
   </form>
+  <script type="text/javascript">
+    $(function() {
+      $('#search_car_models_make_id').change(function() {
+        $('#car_model').empty();
+        if($(this).val() == '' || $(this).val() == undefined) return false;
+        $.get('/home/getmodels/', { make_id: $(this).val() }, function(data) {
+          $('#search_car_model').append('<option></option>');
+          for(i = 0; i < data.length; i++) {
+            $('#car_model_id').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+          }
+        });
+      });
+    });
+  </script>
 <% end %>
+

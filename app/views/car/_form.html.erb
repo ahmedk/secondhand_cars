@@ -21,7 +21,7 @@
       </tr>
       <tr>
         <th>Year</th>
-        <td><%= select_year(@car.year, :start_year => 1992, :end_year => Date.today.year + 1, :include_blank => true) %></td>
+        <td><%= select_tag "year", options_for_select(1992..(Date.today.year), @car.year), :include_blank => true %></td>
       </tr>
       <tr>
         <th>Description</th>
@@ -38,6 +38,29 @@
       <tr>
         <th>Seats</th>
         <td><%= f.text_field :seats %></td>
+      </tr>
+    </table>
+    <a href="#" onclick="javascript: $(this).next().toggle; return false;">More details</a>
+    <table style="display:none">
+      <tr>
+        <th>Type</th>
+        <td><%= select_tag "type", options_for_select(%w(Sedan Sports SUV Coupe Caporle Van Hatchback Station 4WD), @car.type), :include_blank => true %></td>
+      </tr>
+      <tr>
+        <th>Transmission</th>
+        <td><%= select_tag "transmission", options_for_select(%w(Manual Automatic), @car.transmission), :include_blank => true %></td>
+      </tr>
+      <tr>
+        <th>Mileage</th>
+        <td><%= f.text_field :mileage %></td>
+      </tr>
+      <tr>
+        <th>capacity</th>
+        <td><%= f.text_field :capacity %></td>
+      </tr>
+      <tr>
+        <th>Color</th>
+        <td><%= f.text_field :color %></td>
       </tr>
     </table>
   </fieldset>

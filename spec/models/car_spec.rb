@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Car do
   describe "failed save" do
     before(:each) do
-      @car = Car.new(:car_model_id => 1, :description => "A car", :year => "2009", :price => 30000, :doors => 2, :seats => 4, :owner_id => 1)
+      @car = Car.new(:car_model_id => 1, :description => "A car", :year => "2009", :price => 30000, :doors => 2, :seats => 4, :owner_id => 1, :mileage => 3000, :transmission => "Manual", :type => "Sedan", :color => "Black", :capacity => 1600)
     end
 
     it "should invalidate car with missing car model" do
@@ -36,9 +36,28 @@ describe Car do
       @car.should_not be_valid
     end
 
-    it "should validate car with missing doors and seats" do
-      @car.doors = nil
-      @car.seats = nil
+    it "should invalidate car with wrong transmission" do
+      @car.transmission = "Invalid"
+      @car.should_not be_valid
+    end
+
+    it "should invalidate car with wrong type" do
+      @car.type = "Invalid"
+      @car.should_not be_valid
+    end
+
+    it "should invalidate car with wrong mileage" do
+      @car.mileage = "text"
+      @car.should_not be_valid
+    end
+
+    it "should invalidate car with wrong capacity" do
+      @car.capacity = "text"
+      @car.should_not be_valid
+    end
+
+    it "should validate car with minimum data" do
+      @car = Car.new(:car_model_id => 1, :description => "A car", :year => "2009", :price => 30000, :owner_id => 1)
       @car.should be_valid
     end
 

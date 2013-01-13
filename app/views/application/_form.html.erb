@@ -41,7 +41,7 @@
         $.get('/home/getmodels/', { make_id: $(this).val() }, function(data) {
           $('#search_car_model').append('<option></option>');
           for(i = 0; i < data.length; i++) {
-            $('#car_model_id').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+            $('#search_car_model').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
           }
         });
       });

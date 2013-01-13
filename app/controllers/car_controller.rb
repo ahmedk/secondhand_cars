@@ -1,12 +1,6 @@
 class CarController < ApplicationController
   def index
-    @cars = Car.all
-    if(!params[:car_model].nil? && params[:car_model] != "")
-      @cars = @cars.select { |c| c.model_name == params[:car_model] }
-    elsif(!params[:make].nil? && params[:make] != "")
-      @cars = @cars.select { |c| c.make_name == params[:make] }
-    end
-    @cars = @cars.select { |c| c.year.to_s == params[:date][:year] } unless params[:date].nil? || params[:date][:year] == ""
+    @cars = Car.list_cars
   end
 
   def details
@@ -15,7 +9,7 @@ class CarController < ApplicationController
       flash[:error] = "Missing data"
       redirect_to(:action => :index)
     end
-    @car = Car.find(id)
+    @car = Car.view(id)
     if(@car.nil?)
       flash[:error] = "No such car"
       redirect_to :action => :index
@@ -61,7 +55,6 @@ class CarController < ApplicationController
 
 private
   def create_or_update
-    @car.year = params[:date][:year] unless params[:date].nil?
     @car.doors = nil if @car.doors.blank?
     @car.seats = nil if @car.seats.blank?
     if @car.valid?

@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def index
-    @latest = Car.order('created_at DESC').limit(5)
+    @latest = Car.find(:all, :conditions => { :sold => false }, :order => 'created_at DESC').limit(5)
     puts @latest
   end
 

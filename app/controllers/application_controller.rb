@@ -13,9 +13,9 @@ class ApplicationController < ActionController::Base
 
   def search
     @cars = nil
-    puts "blaaaaaaaaaaaaaaaaaaaaaaaa"
     if request.method == "POST"
       @cars = Car.match(params[:search])
+      flash[:notice] = "No cars matching criteria" if @cars.blank?
     end
   end
 end

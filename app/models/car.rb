@@ -29,22 +29,15 @@ class Car < ActiveRecord::Base
   end
 
   def self.match(criteria)
-    criteria = criteria.delete_if {|key, value| value.nil? || value == '' }
-    criteria[:price] = criteria[:price_from]..cirteria[:price_to] if criteria[:price_from] && criteria[:price_to]
-    criteria = Car.merge_conditions(criteria) + " AND price > #{criteria[:price_from]}" if !criteria[:price_from].nil? && criteria[:price_to].nil?
-    criteria = Car.merge_conditions(criteria) + " AND price < #{criteria[:price_from]}" if criteria[:price_from].nil? && !criteria[:price_to].nil?
-    result = Car.find(:all, conditions => criteria)
-    #if(criteria[:price_from] != '' || criteria[:price_to] != '')
-    #  search.remove :price_from
-    #  search.remove :price_to
-    #end
-    #search.each do |key, value|
-    #  reault = result.find("#{key} = #{value}") unless (value.nil? || value != '')
-    #end
-    #if(search[:car_model] && search[:car_model] != '')
-    #  result = result.find(:car_model_id => search[:car_model])
-    #elsif(search[:make] && search[:make] != '')
-    #  result = result.find(:make_name => search[:make_name])
-    #end
+    criteria = criteria.delete_if {|key, value| value.blank? }
+    criteria.delete(:car_models) if criteria[:car_models][:make_id].blank?
+    price_from = criteria[:price_from].to_i
+    price_to = criteria[:price_to].to_i
+    criteria.delete(:price_from)
+    criteria.delete(:price_to)
+    criteria[:price] = price_from..price_to if price_from > 0 && price_to > 0
+    criteria[:price] = price_from..10000000 if price_from > 0 && price_to == 0
+    criteria[:price] = 0..price_to if price_from == 0 && price_to > 0
+    result = Car.find(:all, :conditions => criteria, :joins => [:car_model])
   end
 end

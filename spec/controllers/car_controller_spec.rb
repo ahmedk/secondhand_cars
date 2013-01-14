@@ -7,7 +7,7 @@ describe CarController do
 
   describe "GET 'index'" do
     it "should list all cars" do
-      Car.should_receive(:all)
+      Car.should_receive(:find).with(:all, :conditions => { :sold => false )
       get 'index'
     end
   end

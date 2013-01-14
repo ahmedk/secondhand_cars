@@ -5,8 +5,8 @@ class Car < ActiveRecord::Base
 	validates :description, :year, :price, :car_model, :presence => true
 	validates :doors, :seats, :mileage, :capacity, :numericality => { :only_integer => true }, :allow_nil => true
 #	validates :seats, :numericality => { :only_integer => true }, :allow_nil => true
-  validates :transmission, :inclusion => { :in => %w(Manual Automatic) }
-  validates :type, :inclusion => { :in => %w(Sedan Sports SUV Coupe Caporle Van Hatchback Station 4WD) }
+  validates :transmission, :inclusion => { :in => %w(Manual Automatic) }, :allow_nil => true
+  validates :type, :inclusion => { :in => %w(Sedan Sports SUV Coupe Caporle Van Hatchback Station 4WD) }, :allow_nil => true
 	validates_associated :owner
   validates :owner, :presence => true
 
@@ -51,13 +51,14 @@ class Car < ActiveRecord::Base
     result = Car.find(:all, :conditions => criteria, :joins => [:car_model])
   end
 
-  def self.list_cars(filters)
-    cars = Car.find(:all, conditions => {:sold => false})
+  def self.list_cars(filters = {})
+    cars = Car.find(:all, :conditions => {:sold => false})
     if(!filters[:car_model].blank?)
-      cars = @cars.select { |c| c.model_name == filters[:car_model] }
+      cars = cars.select { |c| c.model_name == filters[:car_model] }
     elsif(!filters[:make].blank?)
-      cars = @cars.select { |c| c.make_name == params[:make] }
+      cars = cars.select { |c| c.make_name == filters[:make] }
     end
-    cars = @cars.select { |c| c.year.to_s == params[:year] } unless params[:year].blank?
+    cars = cars.select { |c| c.year.to_s == filters[:year] } unless filters[:year].blank?
+    return cars
   end
 end

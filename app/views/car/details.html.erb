@@ -10,9 +10,51 @@
     <th>Price</th>
     <td><%= @car.price %>LE</td>
   </tr>
+  <% if !@car.type.blank? %>
+    <tr>
+      <th>Type</th>
+      <td><%= @car.type %></td>
+    </tr>
+  <% end %>
+  <% if !@car.transmission.blank? %>
+    <tr>
+      <th>Transmission</th>
+      <td><%= @car.transmisson %></td>
+    </tr>
+  <% end %>
+  <% if !@car.capacity.blank? %>
+    <tr>
+      <th>Capacity</th>
+      <td><%= @car.capacity %></td>
+    </tr>
+  <% end %>
+  <% if !@car.mileage.blank? %>
+    <tr>
+      <th>Mileage</th>
+      <td><%= @car.mileage %></td>
+    </tr>
+  <% end %>
+  <% if !@car.doors.blank? %>
+    <tr>
+      <th>Doors</th>
+      <td><%= @car.doors %></td>
+    </tr>
+  <% end %>
+  <% if !@car.seats.blank? %>
+    <tr>
+      <th>Seats</th>
+      <td><%= @car.seats %></td>
+    </tr>
+  <% end %>
+  <% if !@car.color.blank? %>
+    <tr>
+      <th>Color</th>
+      <td><%= @car.color %></td>
+    </tr>
+  <% end %>
 </table>
 
 <%= render :partial => "owner/owner_contact", :locals => { :owner => @car.owner } %>
 <%= link_to 'Edit', car_edit_path(@car) %>
 
-<%= link_to 'Return to List', car_path %>
+<%= link_to 'Return to List', list_path %>

@@ -1,10 +1,10 @@
 SecondhandCars::Application.routes.draw do
-  get "car/" => 'car#index'
+  get "car/" => 'car#index', :as => :list
   get "car/new" => 'car#new'
+  post "car/create" => 'car#create', :as => :cars
   get "car/:id" => 'car#details', :as => :car_details
   get "car/:id/edit" => 'car#edit', :as => :car_edit
-  post "car/create" => 'car#create', :as => :cars
-  put "car/update" => 'car#update'
+  put "car/:id/update" => 'car#update', :as => :car
   post "/search" => 'application#search'
   get "/search" => 'application#search'
 

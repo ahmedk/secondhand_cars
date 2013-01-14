@@ -1,6 +1,6 @@
 class CarController < ApplicationController
   def index
-    @cars = Car.list_cars
+    @cars = Car.list_cars(params)
   end
 
   def details
@@ -44,6 +44,7 @@ class CarController < ApplicationController
     owner = Owner.new(params[:owner])
     @car.owner = owner
     create_or_update
+    render 'new' if !@car.valid?
   end
 
   def update
@@ -51,6 +52,7 @@ class CarController < ApplicationController
     @car = Car.find(id)
     @car.assign_attributes(params[:car])
     create_or_update
+    render 'edit' if !@car.valid?
   end
 
 private
@@ -59,7 +61,7 @@ private
     @car.seats = nil if @car.seats.blank?
     if @car.valid?
       @car.save
-      redirect_to :action => :details, :id => id
+      redirect_to :action => :details, :id => @car
     end
     @makes = Make.all
     @car_models = CarModel.where(:make_id => @car.make)

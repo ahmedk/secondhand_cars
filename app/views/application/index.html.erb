@@ -4,3 +4,12 @@
     <li><%= c.model_name %> - <%= c.description %> - <%= link_to 'Details', car_details_path(c) %></li>
   <% end %>
 </ul>
+
+<h2>Most Viewed</h2>
+<ul id="most_viewed">
+  <% @most_viewed.each do |c| %>
+    <li><%= c.model_name %> - <%= c.description %> - <%= link_to 'Details', car_details_path(c) %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Full List', list_path %>

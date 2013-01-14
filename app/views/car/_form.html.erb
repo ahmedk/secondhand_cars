@@ -1,7 +1,19 @@
-<%= form_for(@car, :url => '/car/save') do |f| %>
+<%= form_for(@car) do |f| %>
   <%= f.hidden_field :id %>
   <%= f.hidden_field :owner_id %>
   <%= f.hidden_field :sold %>
+  <% if @car.errors.any? %>
+    <div id="error explanation">
+      <div class="alert alert-error">
+        The form contains <%= pluralize(@car.errors.count, "error") %>.
+      </div>
+      <ul>
+        <% @car.errors.full_messages.each do |msg| %>
+          <li>* <%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <fieldset>
     <legend>Car Details</legend>
     <table>
@@ -40,7 +52,7 @@
         <td><%= f.text_field :seats %></td>
       </tr>
     </table>
-    <a href="#" onclick="javascript: $(this).next().toggle; return false;">More details</a>
+    <a href="#" onclick="javascript: $(this).next().toggle(); return false;">More details</a>
     <table style="display:none">
       <tr>
         <th>Type</th>

@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
   end
 
   def index
-    @latest = Car.find(:all, :conditions => { :sold => false }, :order => 'created_at DESC').limit(5)
-    puts @latest
+    @latest = Car.find(:all, :conditions => { :sold => false }, :order => 'created_at DESC', :limit => 5)
+    @most_viewed = Car.find(:all, :conditions => { :sold => false }, :order => 'visited DESC', :limit => 5)
   end
 
   def search

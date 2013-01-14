@@ -13,7 +13,7 @@ $(document).ready(function() {
 
   $('#search_form').submit(function() {
     var search_fields = 3;
-    var field = [$(this).find('#make'), $(this).find('#car_model'), $(this).find('#date_year')];
+    var field = [$(this).find('#make'), $(this).find('#car_model'), $(this).find('#year')];
     for(var i=0; i < 3; i++) {
       var value = field[i].val();
       if(value == '' || value == undefined) {

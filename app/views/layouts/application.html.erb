@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SecondhandCars</title>
+  <title>Secondhand Cars</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <header style="clear: both">
+    <div style="float: right">
+      <% if false %>
+      <% else %>
+        <a href="#" onclick="$(this).next().toggle(); return false;">Login</a>
+        <table style="display: none">
+          <tr>
+            <td>Email</td>
+            <td><input type="text" /></td>
+          </tr>
+          <tr>
+            <td>Password</td>
+            <td><input type="password" /></td>
+          </tr>
+          <tr><td colspan="2"><input type="submit" value="Login" /></td></tr>
+        </table>
+      <% end %>
+    </div>
+    <h1>Secondhand Cars</h1>
+  </header>
 <%= render :partial => 'layouts/search' %>
 <% if flash[:error] -%>
   <p class='error'><%=h flash[:error] %></p>

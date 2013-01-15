@@ -33,7 +33,7 @@
       </tr>
       <tr>
         <th>Year</th>
-        <td><%= select_tag "year", options_for_select(1992..(Date.today.year), @car.year), :include_blank => true %></td>
+        <td><%= select_tag "car[year]", options_for_select(1992..(Date.today.year), @car.year), :include_blank => true %></td>
       </tr>
       <tr>
         <th>Description</th>
@@ -76,7 +76,7 @@
       </tr>
     </table>
   </fieldset>
-  <% if @car.new_record? %>
+  <% if @car.new_record? && !signed_in? %>
     <%= render :partial => 'owner/owner_form' %>
   <% end %>
 

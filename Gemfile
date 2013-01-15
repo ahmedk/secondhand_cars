@@ -21,6 +21,9 @@ gem 'jquery-rails'
 
 group :test do
   gem 'capybara'
+  gem 'cucumber-rails', :require => false
+  gem 'bcrypt-ruby'
+  gem 'database_cleaner'
 end
 
 group :production do

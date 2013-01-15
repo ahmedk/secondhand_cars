@@ -12,6 +12,8 @@ SecondhandCars::Application.routes.draw do
 
   root :to => 'application#index'
 
+  resources :sessions, only: [:create, :destroy]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

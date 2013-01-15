@@ -1,4 +1,4 @@
-<h1>Available Cars</h1>
+<h2>Available Cars</h2>
 <table>
   <% @cars.each do |car| %>
     <tr>
@@ -15,4 +15,7 @@
     </tr>
   <% end %>
 </table>
+<% if @cars.empty? %>
+  <h4>No cars available</h4>
+<% end %>
 <%= link_to 'Create Car', '/car/new' %>

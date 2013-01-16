@@ -25,7 +25,7 @@
         <th>Model</th>
         <td>
           <% if @car_models.nil? %>
-            <select id="car_model_id" name="car[car_model_id]"></select>
+            <select id="car_car_model_id" name="car[car_model_id]"></select>
           <% else %>
             <%= select_tag "car[car_model_id]", options_from_collection_for_select(@car_models, "id", "name", @car.car_model_id), :include_blank => true %></td>
           <% end %>
@@ -43,6 +43,9 @@
         <th>Price</th>
         <td><%= f.text_field :price %></td>
       </tr>
+    </table>
+    <a href="#" onclick="javascript: $(this).next().toggle(); return false;">More details</a>
+    <table style="display:none">
       <tr>
         <th>Doors</th>
         <td><%= f.text_field :doors %></td>
@@ -51,9 +54,6 @@
         <th>Seats</th>
         <td><%= f.text_field :seats %></td>
       </tr>
-    </table>
-    <a href="#" onclick="javascript: $(this).next().toggle(); return false;">More details</a>
-    <table style="display:none">
       <tr>
         <th>Type</th>
         <td><%= select_tag "type", options_for_select(%w(Sedan Sports SUV Coupe Caporle Van Hatchback Station 4WD), @car.type), :include_blank => true %></td>
@@ -77,8 +77,10 @@
     </table>
   </fieldset>
   <% if @car.new_record? && !signed_in? %>
-    <%= render :partial => 'owner/owner_form' %>
+    <!-- comment befor -->
+    <%= render :partial => 'owner/owner_form', :locals => { :owner => @car.owner } %>
+    <!-- comment after -->
   <% end %>
-
+  <!-- comment submit -->
   <%= f.submit "Save" %>
 <% end %>

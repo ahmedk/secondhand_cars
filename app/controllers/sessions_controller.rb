@@ -1,8 +1,7 @@
 class SessionsController < ApplicationController
   def create
-    owner = Owner.find_by_email(parmas[:email])
+    owner = Owner.find_by_email(params[:email])
     if(owner && owner.user.authenticate(params[:password]))
-      owner.user.name = owner.name
       sign_in(owner.user)
       flash[:notice] = "Login successful"
     else

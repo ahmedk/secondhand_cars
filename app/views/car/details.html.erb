@@ -55,6 +55,7 @@
 </table>
 
 <%= render :partial => "owner/owner_contact", :locals => { :owner => @car.owner } %>
-<%= link_to 'Edit', car_edit_path(@car) %>
-
+<% if @car.editable_by(current_user) %>
+  <%= link_to 'Edit', car_edit_path(@car) %>
+<% end %>
 <%= link_to 'Return to List', list_path %>

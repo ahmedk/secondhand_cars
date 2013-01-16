@@ -1,6 +1,6 @@
 class Owner < ActiveRecord::Base
   attr_accessible :email, :mobile, :name, :phone
-  #has_one :user
+  has_one :user
 
   before_save { |owner| owner.email = email.downcase }
 
@@ -9,7 +9,7 @@ class Owner < ActiveRecord::Base
   validates :email, presence: true,
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
-  #validates_associated :user
+  validates_associated :user
 
   def get_contact
     if !self.mobile.nil?

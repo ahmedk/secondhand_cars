@@ -30,6 +30,10 @@ class Car < ActiveRecord::Base
     return self.car_model.make_id unless self.car_model.nil?
   end
 
+  def editable_by(user)
+    return !user.nil? && user.owner_id == self.owner_id
+  end
+
   def self.view(id)
     car = Car.find(id)
     return if car.nil?

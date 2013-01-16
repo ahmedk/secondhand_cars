@@ -19,7 +19,8 @@ class CarController < ApplicationController
   def new
     @makes = Make.all
     @car = Car.new
-    @car.owner = Owner.new
+    @car.owner = Owner.new unless signed_in?
+    @car.owner_id = current_user.owner_id if signed_in?
   end
 
   def edit
@@ -34,6 +35,10 @@ class CarController < ApplicationController
       flash[:error] = "No such car"
       redirect_to :action => :index
     end
+    if !@car.editable_by(current_user)
+      flash[:error] = "Don't have access to car"
+      redirect_to :action => :index
+    end
 
     @makes = Make.all
     @car_models = CarModel.where(:make_id => @car.make)
@@ -41,8 +46,11 @@ class CarController < ApplicationController
 
   def create
     @car = Car.new(params[:car])
-    owner = Owner.new(params[:owner])
-    @car.owner = owner
+    if(!signed_in?)
+      owner = Owner.new(params[:owner])
+      owner.user = User.new(params[:user])
+      @car.owner = owner
+    end
     create_or_update
     render 'new' if !@car.valid?
   end

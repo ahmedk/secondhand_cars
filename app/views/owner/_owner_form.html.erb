@@ -3,18 +3,26 @@
   <table>
     <tr>
       <th>Owner Name</th>
-      <td><%= text_field_tag 'owner[name]' %></td>
+      <td><%= text_field_tag 'owner[name]', owner.name %></td>
     </tr>
     <tr>
       <th>Owner Email</th>
-      <td><%= email_field_tag 'owner[email]' %></td>
-    </tr>
-    <tr>
-      <th>Owner Phone</th>
-      <td><%= text_field_tag 'owner[phone]' %></td>
+      <td><%= email_field_tag 'owner[email]', owner.email %></td>
     </tr>
     <tr>
       <th>Owner Mobile</th>
-      <td><%= text_field_tag 'owner[mobile]' %></td>
+      <td><%= text_field_tag 'owner[mobile]', owner.mobile %></td>
+    </tr>
+    <tr>
+      <th>Owner Phone</th>
+      <td><%= text_field_tag 'owner[phone]', owner.phone %></td>
+    </tr>
+    <tr>
+      <th>Password</th>
+      <td><%= password_field_tag 'user[password]' %></td>
+    </tr>
+    <tr>
+      <th>Confirm</th>
+      <td><%= password_field_tag 'user[password_confirmation]' %></td>
     </tr>
 </fieldset>

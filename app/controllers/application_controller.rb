@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  include SessionsHelper
+
   def get_models
     if(params[:make_name])
       render :json => Make.find_by_name(params[:make_name]).car_model.to_json

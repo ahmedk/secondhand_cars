@@ -4,7 +4,7 @@ class Car < ActiveRecord::Base
   belongs_to :owner
 	validates :description, :year, :price, :car_model, :presence => true
 	validates :doors, :seats, :mileage, :capacity, :numericality => { :only_integer => true }, :allow_nil => true
-#	validates :seats, :numericality => { :only_integer => true }, :allow_nil => true
+ 	validates :seats, :numericality => { :only_integer => true }, :allow_nil => true
   validates :transmission, :inclusion => { :in => %w(Manual Automatic) }, :allow_nil => true
   validates :type, :inclusion => { :in => %w(Sedan Sports SUV Coupe Caporle Van Hatchback Station 4WD) }, :allow_nil => true
 	validates_associated :owner

@@ -39,3 +39,12 @@ cars = [{:description => "A/T fairly new", :price => 350000, :year => 2013, :sea
 cars.each do |car|
   Car.create! car
 end
+
+#create users
+users = [{:owner_id => 1, :password => "12345", :password_confirmation => "12345"},
+         {:owner_id => 2, :password => "12345", :password_confirmation => "12345"},
+         {:owner_id => 3, :password => "12345", :password_confirmation => "12345"},
+         {:owner_id => 4, :password => "12345", :password_confirmation => "12345"}]
+users.each do |usr|
+  User.create! usr
+end

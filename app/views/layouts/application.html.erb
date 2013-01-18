@@ -10,7 +10,7 @@
   <header style="clear: both">
     <div style="float: right">
       <% if signed_in? %>
-        <%= current_user.name %> - <%= link_to "Sign out", signout_path, method: "delete" %>
+        <%= current_user.name %> - <%= link_to "Logout", signout_path, method: "delete" %>
       <% else %>
         <%= form_for(:sessions, :url => sessions_path) do |f| %>
         <a href="#" onclick="$(this).next().toggle(); return false;">Login</a>

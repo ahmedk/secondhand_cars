@@ -1,12 +1,12 @@
 <h2>Latest Cars</h2>
-<ul id="latest">
+<ul class="listing">
   <% @latest.each do |c| %>
     <li><%= c.model_name %> - <%= c.description %> - <%= link_to 'Details', car_details_path(c) %></li>
   <% end %>
 </ul>
 
 <h2>Most Viewed</h2>
-<ul id="most_viewed">
+<ul class="listing">
   <% @most_viewed.each do |c| %>
     <li><%= c.model_name %> - <%= c.description %> - <%= link_to 'Details', car_details_path(c) %></li>
   <% end %>

@@ -1,15 +1,29 @@
 <h2>Available Cars</h2>
-<table>
+<table class="car_list">
   <% @cars.each do |car| %>
     <tr>
       <td>
-        <%= car.make_name %> -
-        <%= car.model_name %> -
-        <%= car.year %> -
-        <%= car.description %> -
-        <%= car.owner_name %> -
-        <%= car.owner_phone %> -
+        <%= car.make_name %>
+      </td>
+      <td>
+        <%= car.model_name %>
+      </td>
+      <td>
+        <%= car.year %>
+      </td>
+      <td>
+        <%= car.description %>
+      </td>
+      <td>
+        <%= car.owner_name %>
+      </td>
+      <td>
+        <%= car.owner_phone %>
+      </td>
+      <td>
         <%= car.price %> LE
+      </td>
+      <td>
         <%= link_to 'Details', car_details_path(car) %>
       </td>
     </tr>
@@ -18,4 +32,4 @@
 <% if @cars.empty? %>
   <h4>No cars available</h4>
 <% end %>
-<%= link_to 'Create Car', '/car/new' %>
+<%= link_to 'Create Car', car_new_path %>

@@ -28,4 +28,5 @@ end
 
 group :production do
   gem 'pg'
+  gem 'bcrypt-ruby'
 end

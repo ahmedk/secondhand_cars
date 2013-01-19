@@ -1,3 +1,63 @@
-// Place all the styles related to the Car controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  height: 100%;
+  background: #c0c0c0;
+  background: -moz-linear-gradient(top, #c0c0c0 0%, #f0f0f0 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c0c0c0), color-stop(100%,#f0f0f0));
+  background: -webkit-linear-gradient(top, #c0c0c0 0%,#f0f0f0 100%);
+  background: -o-linear-gradient(top, #c0c0c0 0%,#f0f0f0 100%);
+  background: -ms-linear-gradient(top, #c0c0c0 0%,#f0f0f0 100%);
+  background: linear-gradient(to bottom, #c0c0c0 0%,#f0f0f0 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c0c0c0', endColorstr='#f0f0f0',GradientType=0 );
+}
+
+div.container {
+  width: 80%;
+  margin: auto;
+}
+
+ul.listing {
+  list-style-type: none
+}
+
+ul.listing li {
+  width: 18%;
+  margin: auto;
+  display: inline-block;
+  border: 1px solid black;
+  padding: 2px
+}
+
+#search_form {
+  background: #CCCCCC;
+  border: 2px solid white;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.login {
+  float: right;
+  background: white;
+  padding: 5px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+
+h2 {
+  color: navy
+}
+
+table.car_list {
+  width: 100%
+}
+
+table.car_list td {
+  margin: auto;
+  padding: 1px;
+}
+
+table.car_details td, table.car_details th {
+  text-align: left;
+  padding: 5px;
+}
+h1 a { color: black; text-decoration: none }

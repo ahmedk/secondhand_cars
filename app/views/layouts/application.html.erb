@@ -8,7 +8,7 @@
 </head>
 <body>
   <header style="clear: both">
-    <div style="float: right">
+    <div class="login">
       <% if signed_in? %>
         <%= current_user.name %> - <%= link_to "Logout", signout_path, method: "delete" %>
       <% else %>
@@ -28,16 +28,17 @@
         <% end %>
       <% end %>
     </div>
-    <h1>Secondhand Cars</h1>
+    <h1><%= link_to "Secondhand Cars", root_path %></h1>
   </header>
-<%= render :partial => 'layouts/search' %>
-<% if flash[:error] -%>
-  <p class='error'><%=h flash[:error] %></p>
-<% end -%>
-<% if flash[:notice] -%>
-  <p class='notice'><%=h flash[:notice] %></p>
-<% end -%>
-<%= yield %>
-
+  <div class="container">
+    <%= render :partial => 'layouts/search' %>
+    <% if flash[:error] -%>
+      <p class='error'><%=h flash[:error] %></p>
+    <% end -%>
+    <% if flash[:notice] -%>
+      <p class='notice'><%=h flash[:notice] %></p>
+    <% end -%>
+    <%= yield %>
+  </div>
 </body>
 </html>

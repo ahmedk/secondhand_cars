@@ -3,7 +3,7 @@
   <%= f.hidden_field :owner_id %>
   <%= f.hidden_field :sold %>
   <% if @car.errors.any? %>
-    <div id="error explanation">
+    <div id="error_explanation">
       <div class="alert alert-error">
         The form contains <%= pluralize(@car.errors.count, "error") %>.
       </div>

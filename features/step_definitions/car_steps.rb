@@ -33,6 +33,7 @@ end
 Given /^user (.*) is logged in$/ do |id|
   owner = Owner.find(id)
   visit root_path
+  click_link "Login" if Capybara::current_driver == :selenium ||  Capybara::current_driver == :webkit
   fill_in "email", with: owner.email
   fill_in"password", with: "12345"
   click_button "Login"
@@ -61,17 +62,19 @@ Then /^he should see an error message$/ do
   page.should have_selector('div.alert.alert-error')
 end
 
-When /^he submits valid car data$/ do
+When /^he submits valid car data(.*)$/ do |no_owner|
   select("Make1", from: "make_id")
   select("Model1", from: "car[car_model_id]")
   select("2013", from: "car[year]")
   fill_in "car[description]", with: "car description"
   fill_in "car[price]", with: 30000
-  fill_in "owner[name]", with: "owner name"
-  fill_in "owner[email]", with: "o.name@mail.com"
-  fill_in "owner[mobile]", with: "01234567890"
-  fill_in "user[password]", with: "12345"
-  fill_in "user[password_confirmation]", with: "12345"
+  if no_owner.blank?
+    fill_in "owner[name]", with: "owner name"
+    fill_in "owner[email]", with: "o.name@mail.com"
+    fill_in "owner[mobile]", with: "01234567890"
+    fill_in "user[password]", with: "12345"
+    fill_in "user[password_confirmation]", with: "12345"
+  end
   click_button "Save"
 end
 
@@ -91,11 +94,21 @@ end
 
 ####################### filter steps ##########################
 Given /^a user visits the (.*) page$/ do |page|
-  pages = {"home" => root_path, "edit" => car_edit_path(1), "create" => car_new_path}
+  pages = {"home" => root_path, "edit" => car_edit_path(1), "create" => car_new_path, "search" => search_path}
   visit pages[page]
 end
 
 When /^he filters (.*) with "(.*)"$/ do |field, value|
   select(value, from: field)
+  click_button "Filter"
+end
+
+####################### search steps ###########################
+When /^he submits search criteria(.*)$/ do |no_match|
+  if !no_match.blank?
+    select("Make2", from: "search[car_models[make_id]]")
+  else
+    select("Make1", from: "search[car_models[make_id]]")
+  end
   click_button "Search"
 end

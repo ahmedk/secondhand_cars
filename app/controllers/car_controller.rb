@@ -69,6 +69,7 @@ private
     @car.seats = nil if @car.seats.blank?
     if @car.valid?
       @car.save
+      flash[:success] = "Cas saved successfully"
       redirect_to :action => :details, :id => @car
     end
     @makes = Make.all
